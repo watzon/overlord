@@ -14,7 +14,7 @@ type
         ssl_private_key* : string
 
         # Build specific
-        title* : string
+        # title* : string
         url* : string
         base_url* : string
         js_dir* : string
@@ -36,7 +36,7 @@ proc initConfig(): TConfig =
     result.https = false
     result.ssl_certificate = nil
     result.ssl_private_key = nil
-    result.title = "Say Hello to Your Overlord"
+    # result.title = "Say Hello to Your Overlord"
     result.url = ""
     result.base_url = "/"
     result.js_dir = "assets/javascript"
@@ -95,8 +95,8 @@ proc parseConfig*(filename: string): TConfig =
                 result.ssl_certificate = e.value
             of "ssl_private_key":
                 result.ssl_private_key = e.value
-            of "title":
-                result.title = e.value
+            # of "title":
+            #     result.title = e.value
             of "url":
                 result.url = e.value
             of "base_url":

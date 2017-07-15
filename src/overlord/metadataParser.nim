@@ -3,7 +3,7 @@ import omnilog, streams, strutils, parseutils, tables, os
 let logger = getLogger("templateParser")
 
 type
-  TTemplate* = object
+  TTemplateMetadata* = object
     title* : string
     permalink* : string
     layout* : string
@@ -16,11 +16,11 @@ proc parseStringValue(s: string): string =
   else:
     result = s
 
-proc parseTemplateFromString*(body: string): TTemplate =
+proc parseTemplateFromString*(body: string): TTemplateMetadata =
   logger.info("Parsing a template")
   logger.debug("Raw template content: \n" & body)
 
-  result = TTemplate()
+  result = TTemplateMetadata()
   result.locals = newTable[string, string]()
 
   var i = 0
@@ -79,7 +79,7 @@ proc parseTemplateFromString*(body: string): TTemplate =
   logger.info("Finished parsing template")
   logger.debug("Front matter: " & repr(result))
 
-proc parseTemplateFromFile*(filename: string): TTemplate =
+proc parseTemplateFromFile*(filename: string): TTemplateMetadata =
   logger.info("Parsing template from file '" & filename & "'.")
   var fileContent = readFile(filename)
   return parseTemplateFromString(fileContent)
